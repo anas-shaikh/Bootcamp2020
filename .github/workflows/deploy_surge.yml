@@ -1,0 +1,30 @@
+name: Deploy Website
+#this asking for the name give it by your choice.
+on:
+  push:
+    branches: [ master ]
+# it means this the trigger the starting point of actions, it means when ever i push my changes to the master branch then i needs my changes to be done what ever we have assigned to it.
+
+# now its time for its job, job means work which is being triggered.
+jobs:
+  #It will creat small virtual machine on github server
+  build:
+# It means it is creating a Docker instance(part) or linux instance in a bigger server
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository means getting the code from github repository and qouting the code to this virtual machine.
+    - uses: actions/checkout@v2
+
+    # now we need to install node and surge in this virtual machine to deploy our website from here. like the stpes we have done in our local machine same steps should take place in there.
+    - name: Install NodeJS
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: 12
+    - name: Install Surge
+      run: npm install -g surge
+      
+      # now we need to deploy as we have done previously on our local machine
+    - name: Run Surge
+      #surge command and path of git hub as it is current repository
+      run: surge ./ bootcamp2020anas.surge.sh --token ${{secrets.SURGE_TOKEN}}
