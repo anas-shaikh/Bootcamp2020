@@ -27,4 +27,4 @@ jobs:
       # now we need to deploy as we have done previously on our local machine
     - name: Run Surge
       #surge command and path of git hub as it is current repository
-      run: surge ./ bootcampnewapp.surge.sh --token ${{secrets.SURGE_TOKEN}}
+      run: surge ./ bootcamp2020anas.surge.sh --token ${{secrets.SURGE_TOKEN}}
